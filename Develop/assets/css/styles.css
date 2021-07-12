@@ -70,6 +70,14 @@ body {
   cursor: pointer;
 }
 
+.col-8 {
+    padding-top: 30px;
+}
+
+i {
+    font-size: 18px;
+}
+
 .list-container .list-group-item {
   border-left: none;
   border-right: none;
