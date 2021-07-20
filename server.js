@@ -55,8 +55,7 @@ app.route("/api/notes")
             }
         }
     
-        
-        newNote.id = highestId + 1;
+                newNote.id = highestId + 1;
   
         
         database.push(newNote)
