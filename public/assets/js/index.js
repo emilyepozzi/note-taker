@@ -250,11 +250,12 @@ return gettingNote().then(function (data) {
 });
 };
 
-  $saveNoteBtn.addEventListener('click', handleNoteSave);
-  $noteList.on("click", newNote);
-  $newNoteBtn.addEventListener('click', newNote);
-  $noteTitle.addEventListener('keyup', handleRenderSaveBtn);
-  $noteText.addEventListener('keyup', handleRenderSaveBtn);
+  $saveNoteBtn.on('click', handleNoteSave);
+  $noteList.on("click", ".list-group-item", handleNoteView);
+  $newNoteBtn.on('click', handleNoteView);
+  $noteList.on("click", ".delete-note", handleNoteDelete);
+  $noteTitle.on('keyup', handleRenderSaveBtn);
+  $noteText.on('keyup', handleRenderSaveBtn);
 
 
 getAndRenderNotes();

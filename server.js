@@ -22,11 +22,9 @@ app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
 })
 
-// GET, POST, DELETE API
-
+// get, post and delete
 app.route("/api/notes")
  
-
     .get(function (req, res) {
         res.json(database);
     })
