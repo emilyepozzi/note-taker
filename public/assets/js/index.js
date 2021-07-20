@@ -49,7 +49,7 @@ var deletingNotes = function (id) {
     });
 };
 
-var gettingAN = function () {
+var activeNote = function () {
     $saveNoteBtn.hide();
     if (activeNote.id) {
         $noteTitle.attr("readonly", true);
