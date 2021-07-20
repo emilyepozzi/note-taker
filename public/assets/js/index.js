@@ -190,6 +190,13 @@ const renderNoteList = function (notes) {
 
   let noteListItems = [];
 
+  for (var i = 0; i < notes.length; i++) {
+      var note = notes[i];
+
+      var $li = $("<li class='list-group-item'>").data(note);
+      var $span = $("<span>").text(note.title);
+      var $delBtn = $("<i class='fas")
+  }
   // Returns HTML element with or without a delete button
 //   const createLi = (text, delBtn = true) => {
 //     const liEl = document.createElement('li');
