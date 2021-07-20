@@ -4,13 +4,14 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname === '/notes') {
-  noteTitle = document.querySelector('.note-title');
-  noteText = document.querySelector('.note-textarea');
-  saveNoteBtn = document.querySelector('.save-note');
-  newNoteBtn = document.querySelector('.new-note');
-  noteList = document.querySelectorAll('.list-container .list-group');
-}
+var activeNote = {};
+
+var getNotes = function () {
+    return $.ajax({
+        url: "/api/notes",
+        method: "GET"
+    });
+};
 
 // Show an element
 const show = (elem) => {
@@ -24,6 +25,21 @@ const hide = (elem) => {
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
+
+var deleteNote = function (id) {
+    return $.ajax({
+        url: "api/notes/" + id,
+        method: "DELETE"
+    });
+};
+
+var renderActiveNote = function () {
+    $saveNoteBtn.hide();
+
+    if (activeNote.id) {
+        
+    }
+}
 
 const getNotes = () =>
   fetch('/api/notes', {
