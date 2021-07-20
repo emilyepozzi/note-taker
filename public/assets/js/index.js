@@ -14,18 +14,34 @@ var getNotes = function () {
     });
 };
 
-// Show an element
-const show = (elem) => {
-  elem.style.display = 'inline';
+//saving note in the database
+var saveNote = function (note) {
+    return $.ajax({
+        url: "/api/notes",
+        data: note,
+        method: "POST"
+    });
+};
+// // Show an element
+// const show = (elem) => {
+//   elem.style.display = 'inline';
+// };
+
+// // Hide an element
+// const hide = (elem) => {
+//   elem.style.display = 'none';
+// };
+
+// deleting a note database
+var deleteNote = function (id) {
+    return $.ajax({
+        url: "api/notes/" + id, 
+        method: "DELETE"
+    });
 };
 
-// Hide an element
-const hide = (elem) => {
-  elem.style.display = 'none';
-};
-
-// activeNote is used to keep track of the note in the textarea
-let activeNote = {};
+// // activeNote is used to keep track of the note in the textarea
+// let activeNote = {};
 
 var deleteNote = function (id) {
     return $.ajax({
@@ -187,14 +203,19 @@ const renderNoteList = async (notes) => {
   }
 };
 
-// Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+// notes from the database and then they go to the side bar to save
+const getAndRenderNotes = function () {
+return getNotes().then(function (data) {
+    renderNoteList(data);
+});
+};
 
-if (window.location.pathname === '/notes') {
-  saveNoteBtn.addEventListener('click', handleNoteSave);
-  newNoteBtn.addEventListener('click', handleNewNoteView);
-  noteTitle.addEventListener('keyup', handleRenderSaveBtn);
-  noteText.addEventListener('keyup', handleRenderSaveBtn);
-}
+
+  $saveNoteBtn.addEventListener('click', handleNoteSave);
+  $noteList.on("click", handleNewNoteView);
+  $newNoteBtn.addEventListener('click', handleNewNoteView);
+  $noteTitle.addEventListener('keyup', handleRenderSaveBtn);
+  $noteText.addEventListener('keyup', handleRenderSaveBtn);
+
 
 getAndRenderNotes();
