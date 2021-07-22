@@ -1,32 +1,37 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const database = require("./db/db")
+const database = require("./db/db.json");
+
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
-
 // This sets up data parsing-- Express will interpret it/format data as JSON.
-
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
-});
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Notes html 
 app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
 })
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+
 
 // get, post and delete
 app.route("/api/notes")
  
     .get(function (req, res) {
-        res.json(database);
+        fs.readFile("./db/db.json", (error, data) => {
+            if (error) console.error(error);
+            console.log(data);
+            res.json(data)
+        })
+        // res.json(database);
     })
 
 // adding new note to json
