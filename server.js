@@ -6,36 +6,38 @@ const database = require("./db/db.json");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// This sets up data parsing-- Express will interpret it/format data as JSON.
+// setting up data parsing
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
 
-// Notes html 
+//notes for html
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
 })
-
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 
 
-// get, post and delete
+// post, get and delete
 app.route("/api/notes")
  
 .get(function (req, res) {
     console.log("testing")
     fs.readFile("./db/db.json", 'utf8', (error, data) => {
+
         if (error) console.error(error);
         console.log(JSON.parse(data));
         res.json(JSON.parse(data))
     })
-    // res.json(database);
+ 
 })
 
-// adding new note to json
+//adding info in json
     .post(function (req, res) {
         let jsonFiles = path.join(__dirname, "/db/db.json");
         let newNote = req.body;
@@ -52,7 +54,6 @@ app.route("/api/notes")
         
         database.push(newNote)
 
-    //db json file
         fs.writeFile(jsonFiles, JSON.stringify(database), function (err) {
 
             if (err) {
@@ -65,31 +66,32 @@ app.route("/api/notes")
         res.json(newNote);
     });
 
-
-app.delete("/api/notes/:id", function (req, res) {
-    let jsonFiles = path.join(__dirname, "/db/db.json");
-
-    for (let i = 0; i < database.length; i++) {
-
-        if (database[i].id == req.params.id) {
-
-            
-            database.splice(i, 1);
-            break;
-        }
-    }
+// app.delete("/api/notes/:id", function (req, res) {
+//     let jsonFiles = path.join(__dirname, "/db/db.json");
 
 
-    fs.writeFileSync(jsonFiles, JSON.stringify(database), function (err) {
+//     for (let i = 0; i < database.length; i++) {
 
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log("Your note was deleted!");
-        }
-    });
-    res.json(database);
-});
+
+//         if (database[i].id == req.params.id) {
+
+
+//             database.splice(i, 1);
+//             break;
+//         }
+//     }
+
+//     fs.writeFileSync(jsonFiles, JSON.stringify(database), function (err) {
+
+//         if (err) {
+//             return console.log(err);
+//         } else {
+//             console.log("Your note was deleted!");
+//         }
+//     });
+//     res.json(database);
+// });
+
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
