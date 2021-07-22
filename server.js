@@ -25,14 +25,15 @@ app.get("*", function (req, res) {
 // get, post and delete
 app.route("/api/notes")
  
-    .get(function (req, res) {
-        fs.readFile("./db/db.json", (error, data) => {
-            if (error) console.error(error);
-            console.log(data);
-            res.json(data)
-        })
-        // res.json(database);
+.get(function (req, res) {
+    console.log("testing")
+    fs.readFile("./db/db.json", 'utf8', (error, data) => {
+        if (error) console.error(error);
+        console.log(JSON.parse(data));
+        res.json(JSON.parse(data))
     })
+    // res.json(database);
+})
 
 // adding new note to json
     .post(function (req, res) {
