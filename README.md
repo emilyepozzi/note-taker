@@ -5,7 +5,9 @@ A simple note taking application that allows you to save needed notes with a tit
 ## Deployed Application :
 [Note Taker](https://emilyepozzi.github.io/note-taker/)
 
-# Table of Contents
+### Contributors
+- Andy Mendez.. The best TA in the entire world. I owe him my passing grades in this class.
+- [Joe Young](https://github.com/JYoung32) My tutor and my mentor on this struggle bus we call code. 
 
 # User Story
 ```
